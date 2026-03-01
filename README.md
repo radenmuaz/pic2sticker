@@ -38,17 +38,21 @@ To achieve true parity with the original Python `rembg` script, this project inc
 
 Because compiling OpenCV to WebAssembly takes 20-30 minutes, it is not included by default.
 
-To compile it yourself, simply run the included bash script:
+To compile it yourself, first download the required dependencies:
+```bash
+./setup-deps.sh
+```
+
+Then run the build script:
 ```bash
 ./build-wasm.sh
 ```
 
-**What the script does:**
-1. Downloads and activates the Emscripten SDK (`emsdk`).
-2. Clones OpenCV 4.x.
-3. Compiles a highly stripped-down version of OpenCV (`core` and `imgproc` modules only) to static WASM libraries.
-4. Compiles `src/wasm/postprocess.cpp` alongside the OpenCV static libraries into a tiny ~1MB `postprocess.wasm` file.
-5. Copies the resulting `.wasm` and `.js` loader to the `public/models/` directory.
+**What the scripts do:**
+1. `setup-deps.sh` downloads and activates the Emscripten SDK (`emsdk`) and clones OpenCV 4.x.
+2. `build-wasm.sh` compiles a highly stripped-down version of OpenCV (`core` and `imgproc` modules only) to static WASM libraries.
+3. Compiles `src/wasm/postprocess.cpp` alongside the OpenCV static libraries into a tiny ~1MB `postprocess.wasm` file.
+4. Copies the resulting `.wasm` and `.js` loader to the `public/models/` directory.
 
 Once the script finishes, reload your browser and select the **Best (Precise)** processing mode in the Advanced Settings tab!
 

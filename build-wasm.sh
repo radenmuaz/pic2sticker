@@ -6,23 +6,13 @@ echo "Building OpenCV Custom WASM Module..."
 echo "This may take 20-30 minutes depending on your machine."
 echo "=========================================="
 
-# 1. Setup Emscripten locally if not exists
-if [ ! -d "emsdk" ]; then
-    echo "Cloning Emscripten SDK..."
-    git clone https://github.com/emscripten-core/emsdk.git
-    cd emsdk
-    ./emsdk install latest
-    ./emsdk activate latest
-    cd ..
+if [ ! -d "emsdk" ] || [ ! -d "opencv" ]; then
+    echo "Dependencies not found. Please run ./setup-deps.sh first."
+    exit 1
 fi
 
 source ./emsdk/emsdk_env.sh
 
-# 2. Clone OpenCV
-if [ ! -d "opencv" ]; then
-    echo "Cloning OpenCV 4.x..."
-    git clone --branch 4.x --depth 1 https://github.com/opencv/opencv.git
-fi
 
 # 3. Build OpenCV for WebAssembly (Disabling everything except core and imgproc to keep the size < 1MB)
 echo "Compiling OpenCV into static WASM libraries..."
