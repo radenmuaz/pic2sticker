@@ -1,0 +1,1 @@
+-isystem /Users/muaz/code/delbg/pic2sticker/opencv/build_wasm -isystem /Users/muaz/code/delbg/pic2sticker/opencv/include -isystem /Users/muaz/code/delbg/pic2sticker/opencv/modules/core/include -isystem /Users/muaz/code/delbg/pic2sticker/opencv/modules/imgproc/include -isystem /Users/muaz/code/delbg/pic2sticker/opencv/modules/imgcodecs/include

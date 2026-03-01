@@ -1,0 +1,3 @@
+/Users/muaz/code/delbg/pic2sticker/build_module/CMakeFiles/postprocess.dir
+/Users/muaz/code/delbg/pic2sticker/build_module/CMakeFiles/edit_cache.dir
+/Users/muaz/code/delbg/pic2sticker/build_module/CMakeFiles/rebuild_cache.dir
