@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ImageUploadZone } from '@/components/image-upload-zone'
 import { ImageResult } from '@/components/image-result'
 import { removeBackground } from '@/lib/rembg'
@@ -30,6 +30,29 @@ export default function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [settings, setSettings] = useState<ProcessingSettings>(DEFAULT_SETTINGS);
   const [showSettings, setShowSettings] = useState(false);
+  const kofiRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Only fetch and initialize once
+    if (!document.getElementById('kofi-widget-script')) {
+      const script = document.createElement('script');
+      script.id = 'kofi-widget-script';
+      script.src = 'https://storage.ko-fi.com/cdn/widget/Widget_2.js';
+      script.async = true;
+      script.onload = () => {
+        if (typeof window !== 'undefined' && (window as any).kofiwidget2 && kofiRef.current) {
+          (window as any).kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'N4N0191W6B');
+          kofiRef.current.innerHTML = (window as any).kofiwidget2.getHTML();
+        }
+      };
+      document.head.appendChild(script);
+    } else {
+      if (typeof window !== 'undefined' && (window as any).kofiwidget2 && kofiRef.current && !kofiRef.current.innerHTML) {
+        (window as any).kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'N4N0191W6B');
+        kofiRef.current.innerHTML = (window as any).kofiwidget2.getHTML();
+      }
+    }
+  }, []);
 
   const handleImageSelected = (file: File) => {
     const url = URL.createObjectURL(file);
@@ -115,9 +138,10 @@ export default function App() {
         <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
           NoBG
         </h1>
-        <p className="text-muted-foreground max-w-[600px] mx-auto text-lg">
+        <p className="text-muted-foreground max-w-[600px] mx-auto text-lg mb-6">
           Client-side background removal via WebAssembly and ONNX Runtime.
         </p>
+        <div ref={kofiRef} className="flex justify-center" />
       </header>
 
       <main className="flex-1 w-full max-w-5xl mx-auto flex flex-col items-center">
