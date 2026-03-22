@@ -322,6 +322,32 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="w-full py-6 mt-10 text-center text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          <p>
+            Developed by{' '}
+            <a 
+              href="https://radenlabs.app" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="font-medium hover:text-foreground underline underline-offset-4 transition-colors"
+            >
+              RadenLabs
+            </a>
+          </p>
+          <span className="hidden sm:inline">&bull;</span>
+          <a 
+            href="https://github.com/radenmuaz/pic2sticker" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="font-medium hover:text-foreground underline underline-offset-4 transition-colors"
+          >
+            Open Source
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }
