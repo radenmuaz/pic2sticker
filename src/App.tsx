@@ -113,7 +113,7 @@ export default function App() {
     <div className="min-h-screen bg-background text-foreground flex flex-col p-4 md:p-8">
       <header className="text-center mb-10 mt-8">
         <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
-          Pic2Sticker
+          NoBG
         </h1>
         <p className="text-muted-foreground max-w-[600px] mx-auto text-lg">
           Client-side background removal via WebAssembly and ONNX Runtime.

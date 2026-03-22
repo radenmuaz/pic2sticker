@@ -122,7 +122,7 @@ export function ImageResult({
                                             size="lg"
                                             className="shadow-lg min-w-[200px]"
                                         >
-                                            Pic2Sticker Now
+                                            Remove BG Now
                                         </Button>
                                     </div>
                                 ) : (

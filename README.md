@@ -1,4 +1,4 @@
-# Pic2Sticker
+# NoBG
 
 A fully client-side (edge-only) background removal React application built with Vite and Tailwind CSS.
 This project is a browser-only port of the `delbg` UI combined with the incredible `rembg` U2Net background removal model.
