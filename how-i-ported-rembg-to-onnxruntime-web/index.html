@@ -15,17 +15,20 @@
     <div style="font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; display: none;">
       <a href="/">Back to App</a>
       <h1>How I Ported RemBG to ONNXRuntime Web</h1>
-      <p>Bringing professional-grade background removal directly to the browser required breaking down Python's rembg library and porting its logic to WebAssembly.</p>
+      <p>March 23, 2026 • 10 min read</p>
+      <p>Bringing professional-grade background removal directly to the browser required breaking down Python's rembg library and porting its logic to WebAssembly. This is a comprehensive, step-by-step developer tutorial on how NoBG achieves native-like performance purely on the client. You can view the full source code for our implementation here: https://github.com/radenmuaz/pic2sticker.</p>
       <h2>Step 1: The Neural Network (ONNX Runtime Web)</h2>
-      <p>Exporting the PyTorch U2Net model into the ONNX format and running it via onnxruntime-web leverages WebAssembly (WASM) for raw inference.</p>
-      <h2>Step 2: The Post-Processing Problem</h2>
-      <p>The neural network alone isn't enough. We must port Alpha Matting, Gaussian Blurring, and Morphological Opening to C++ since JavaScript is too slow.</p>
-      <h2>Step 3: Compiling OpenCV to WebAssembly</h2>
-      <p>Using Emscripten (emsdk) to compile OpenCV directly to WebAssembly, specifically the core and imgproc modules into static WASM libraries.</p>
-      <h2>Step 4: Writing the C++ Wrapper</h2>
-      <p>A custom C++ file (src/wasm/postprocess.cpp) consumes the raw inference mask from ONNX and utilizes OpenCV to generate trimaps and compute alpha mattes.</p>
-      <h2>Step 5: Frontend Integration</h2>
-      <p>Inside the React Vite application, we dynamically load the ~1MB WASM module and pass the raw image tensor into the WASM heap for synchronous processing.</p>
+      <p>We export the PyTorch U2Net model into the ONNX format (specifically the lightweight u2netp.onnx). Using onnxruntime-web, we can execute this model natively in the browser leveraging WebAssembly (WASM) and WebGL execution providers.</p>
+      <h2>Step 2: A Minimal Reproducible Example</h2>
+      <p>Running ONNX in the browser is surprisingly elegant. If you simply want to see the u2netp.onnx model generate a raw probability mask, you can replicate this entire process in a single HTML file with inline JavaScript manipulating an HTML5 canvas directly without any bundlers required.</p>
+      <h2>Step 3: The Post-Processing Problem</h2>
+      <p>The code gives you a soft probability mask, but the neural network alone isn't enough for professional graphics. The Python rembg library heavily relies on Alpha Matting, Gaussian Blurring, and Morphological Opening (via OpenCV and pymatting) to accurately refine tricky edges.</p>
+      <h2>Step 4: Compiling OpenCV to WebAssembly</h2>
+      <p>To replicate the exact Python cv2 environment, we use Emscripten (emsdk) to compile C++ OpenCV directly to WebAssembly, shrinking it from 30MB down to static WASM core libraries.</p>
+      <h2>Step 5: Writing the C++ Wrapper</h2>
+      <p>With our static libraries built, we wrote a custom C++ file (postprocess.cpp) that effectively bridges the raw inference mask from the ONNX JavaScript execution into OpenCV for matrix thresholds and trimaps.</p>
+      <h2>Step 6: Frontend React Integration</h2>
+      <p>Finally, inside our Vite application environment (src/lib/rembg.ts), we dynamically load postprocess.wasm only when needed, passing the RAW ONNX mask straight into C++ memory for precise and rapid alpha matting.</p>
     </div>
   </div>
   <script type="module" src="/src/pages/how-i-ported.tsx"></script>

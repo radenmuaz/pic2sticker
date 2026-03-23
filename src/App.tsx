@@ -429,6 +429,7 @@ export default function App() {
             Open Source
           </a>
         </div>
+        <p className="mt-4 text-xs opacity-60">Last Updated: 2026-03-23</p>
       </footer>
     </div>
   )
