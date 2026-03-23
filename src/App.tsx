@@ -5,6 +5,25 @@ import { removeBackground } from '@/lib/rembg'
 import { Settings2, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+function useApproximateWindowSize() {
+  const [size, setSize] = useState({ width: 0, height: 0, isMobile: false });
+  useEffect(() => {
+    function updateSize() {
+      // Approximate device size to nearest 100 to reduce tiny renders, 
+      // but exact enough for responsive logic if needed
+      setSize({
+        width: Math.round(window.innerWidth / 100) * 100,
+        height: Math.round(window.innerHeight / 100) * 100,
+        isMobile: window.innerWidth < 768
+      });
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 export type ProcessingSettings = {
   mode: 'basic' | 'best';
   postProcessMask: boolean;
@@ -24,6 +43,7 @@ const DEFAULT_SETTINGS: ProcessingSettings = {
 };
 
 export default function App() {
+  const windowSize = useApproximateWindowSize();
   const [inputImage, setInputImage] = useState<string | null>(null);
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [fileToProcess, setFileToProcess] = useState<File | null>(null);
@@ -133,7 +153,11 @@ export default function App() {
   }, [isProcessing]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col p-4 md:p-8">
+    <div 
+      className="min-h-screen bg-background text-foreground flex flex-col p-4 md:p-8"
+      data-approx-width={windowSize.width}
+      data-is-mobile={windowSize.isMobile}
+    >
       <header className="text-center mb-10 mt-8">
         <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
           NoBG
@@ -323,8 +347,66 @@ export default function App() {
         )}
       </main>
 
+      {/* SEO Content Section */}
+      <section className="w-full max-w-4xl mx-auto mt-24 mb-6 px-4 md:px-0 text-left space-y-16">
+        <article className="space-y-4">
+          <h2 className="text-3xl font-extrabold tracking-tight">Free AI Background Remover (No Upload)</h2>
+          <p className="text-muted-foreground leading-relaxed text-[17px]">
+            NoBG is a completely free, fast, and private background removal tool that runs entirely in your web browser. 
+            Unlike other popular background removers, <strong>your photos are never uploaded to any server.</strong> 
+            We use advanced WebAssembly and ONNX Runtime technology to process your images locally on your device.
+          </p>
+        </article>
+
+        <div className="grid md:grid-cols-2 gap-10">
+          <article className="space-y-3">
+            <h3 className="text-xl font-semibold">How it Works</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              When you select an image, NoBG downloads a small AI model (U2Net) to your browser cache just once. 
+              The application then runs the complex neural network directly on your CPU or GPU to mask out the background. 
+              You get instant results without waiting for cloud processing or worrying about your privacy.
+            </p>
+          </article>
+          
+          <article className="space-y-3">
+            <h3 className="text-xl font-semibold">100% Private & Secure</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Why does "no-upload" matter? Whether you're removing backgrounds from personal photos, confidential company assets, or ID cards, your images never leave your computer. There are no external servers logging your pictures, no databases storing your information, and no potential data leaks to worry about.
+            </p>
+          </article>
+        </div>
+
+        <article className="space-y-6 bg-muted/30 p-8 rounded-2xl border">
+          <h3 className="text-2xl font-bold">Frequently Asked Questions</h3>
+          
+          <div className="grid gap-6">
+            <div>
+              <h4 className="font-semibold text-foreground text-lg mb-1">Is this really free background removal?</h4>
+              <p className="text-muted-foreground">Yes, it is entirely free to use without limits. Since we don't have to pay for expensive cloud server processing (your device does the heavy lifting), we don't need to charge you.</p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-foreground text-lg mb-1">What devices does this work on?</h4>
+              <p className="text-muted-foreground">NoBG works seamlessly on modern web browsers (Chrome, Firefox, Safari, Edge) across desktop computers, laptops, and capable mobile devices.</p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-foreground text-lg mb-1">Why do the advanced settings help?</h4>
+              <p className="text-muted-foreground">The "RemBG" processing mode with Alpha Matting fine-tunes edges around tricky subjects like hair or fur. You can safely tweak foreground and background thresholds for perfect transparent background cutouts.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
       {/* Footer */}
-      <footer className="w-full py-6 mt-10 text-center text-sm text-muted-foreground">
+      <footer className="w-full py-6 mt-10 text-center text-sm text-muted-foreground border-t">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-4">
+          <a href="/about" className="font-medium hover:text-foreground underline underline-offset-4 transition-colors">About</a>
+          <span className="hidden sm:inline">&bull;</span>
+          <a href="/gallery" className="font-medium hover:text-foreground underline underline-offset-4 transition-colors">Gallery</a>
+          <span className="hidden sm:inline">&bull;</span>
+          <a href="/how-i-ported-rembg-to-onnxruntime-web" className="font-medium hover:text-foreground underline underline-offset-4 transition-colors">Developer Blog</a>
+        </div>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
           <p>
             Developed by{' '}

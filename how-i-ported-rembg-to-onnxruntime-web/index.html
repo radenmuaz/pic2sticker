@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I Ported RemBG to ONNXRuntime Web - NoBG Developer Blog</title>
+  <meta name="description" content="A deep dive into bringing professional-grade Python AI background removal directly to the web browser using WebAssembly and ONNX Runtime Web." />
+  <meta property="og:title" content="How I Ported RemBG to ONNXRuntime Web" />
+  <link rel="canonical" href="https://nobg.radenlabs.app/how-i-ported-rembg-to-onnxruntime-web" />
+</head>
+<body>
+  <div id="root">
+    <!-- SSR Fallback -->
+    <div style="font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; display: none;">
+      <a href="/">Back to App</a>
+      <h1>How I Ported RemBG to ONNXRuntime Web</h1>
+      <p>Bringing professional-grade background removal directly to the browser required breaking down Python's rembg library and porting its logic to WebAssembly.</p>
+      <h2>Step 1: The Neural Network (ONNX Runtime Web)</h2>
+      <p>Exporting the PyTorch U2Net model into the ONNX format and running it via onnxruntime-web leverages WebAssembly (WASM) for raw inference.</p>
+      <h2>Step 2: The Post-Processing Problem</h2>
+      <p>The neural network alone isn't enough. We must port Alpha Matting, Gaussian Blurring, and Morphological Opening to C++ since JavaScript is too slow.</p>
+      <h2>Step 3: Compiling OpenCV to WebAssembly</h2>
+      <p>Using Emscripten (emsdk) to compile OpenCV directly to WebAssembly, specifically the core and imgproc modules into static WASM libraries.</p>
+      <h2>Step 4: Writing the C++ Wrapper</h2>
+      <p>A custom C++ file (src/wasm/postprocess.cpp) consumes the raw inference mask from ONNX and utilizes OpenCV to generate trimaps and compute alpha mattes.</p>
+      <h2>Step 5: Frontend Integration</h2>
+      <p>Inside the React Vite application, we dynamically load the ~1MB WASM module and pass the raw image tensor into the WASM heap for synchronous processing.</p>
+    </div>
+  </div>
+  <script type="module" src="/src/pages/how-i-ported.tsx"></script>
+</body>
+</html>

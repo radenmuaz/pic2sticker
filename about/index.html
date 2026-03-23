@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About NoBG - Private Browser-Based Background Remover</title>
+  <meta name="description" content="Learn about NoBG, the 100% private, client-side AI background removal tool that keeps your visual data secure on your own device." />
+  <meta property="og:title" content="About NoBG" />
+  <meta property="og:description" content="100% private, free background removal. No uploads required." />
+  <link rel="canonical" href="https://nobg.radenlabs.app/about" />
+</head>
+<body>
+  <div id="root">
+    <!-- SSR Fallback -->
+    <div style="font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; display: none;">
+      <a href="/">Back to App</a>
+      <h1>About NoBG</h1>
+      <p>NoBG was built with a single premise: background removal should be fast, free, and shouldn't require uploading your personal or professional photos to a random server.</p>
+      <h2>How it Actually Works</h2>
+      <ol>
+        <li><strong>Downloads the Neural Network:</strong> The application fetches the highly-optimized <code>u2netp.onnx</code> AI model directly to your browser's local cache. This is the same lightweight architecture pioneered by the popular <a href="https://github.com/danielgatis/rembg" target="_blank" rel="noopener noreferrer">rembg</a> Python repository.</li>
+        <li><strong>Loads ONNX Runtime Web:</strong> We initialize Microsoft's web-optimized machine learning engine, binding it to WebAssembly (WASM).</li>
+        <li><strong>Runs the Model:</strong> The ONNX Runtime processes your image's pixels through the U2Net model locally on your CPU or GPU.</li>
+        <li><strong>JavaScript Post-Processing:</strong> We apply fine-tuned edge smoothing algorithms right in your browser to refine the tricky edges.</li>
+      </ol>
+    </div>
+  </div>
+  <script type="module" src="/src/pages/about.tsx"></script>
+</body>
+</html>

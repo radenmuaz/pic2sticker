@@ -5,14 +5,30 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NoBG</title>
+  <title>NoBG - Free AI Background Remover (No Upload)</title>
+  <meta name="description"
+    content="Remove image backgrounds instantly right in your browser. 100% private, free AI tool, no image uploads required. Fast, offline-capable, and secure." />
+  <meta name="keywords"
+    content="remove background, bg remover, free background remover, ai background remover browser, no upload background remover, private image editor" />
+  <meta property="og:title" content="NoBG - Free Private AI Background Remover" />
+  <meta property="og:description"
+    content="Remove image backgrounds right in your browser. Your images never leave your device. Fast, free, and completely private." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nobg.radenlabs.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NoBG - Free Private Background Remover" />
+  <meta name="twitter:description"
+    content="100% private background removal in your browser using AI. No uploads required." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nobg.radenlabs.app/" />
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-963674974"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9H6QLEFF3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
+    gtag('config', 'G-B9H6QLEFF3');
     gtag('config', 'AW-963674974');
   </script>
   <!-- Event snippet for Page view conversion page -->
@@ -23,20 +39,26 @@
       'currency': 'MYR'
     });
   </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9H6QLEFF3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-B9H6QLEFF3');
-  </script>
 
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div style="font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; display: none;">
+      <!-- SEO Fallback Content for non-JS crawlers. React will replace this. -->
+      <h1>NoBG - Free AI Background Remover (No Upload)</h1>
+      <p>Remove image backgrounds instantly right in your browser. 100% private, free AI tool, no image uploads
+        required. Fast, offline-capable, and secure.</p>
+      <h2>How it Works</h2>
+      <p>Your images are processed locally on your device using WebAssembly and ONNX Runtime. This means your photos
+        never leave your computer, ensuring complete privacy and security.</p>
+      <h2>100% Private & Secure</h2>
+      <p>Whether you're removing backgrounds from personal photos, confidential company assets, or ID cards, your images
+        never leave your computer. There are no external servers logging your pictures, no databases storing your
+        information, and no potential data leaks to worry about.</p>
+    </div>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
