@@ -159,6 +159,7 @@ export default function App() {
       data-is-mobile={windowSize.isMobile}
     >
       <header className="text-center mb-10 mt-8">
+        <img src="/logo.png" alt="NoBG Logo" className="w-16 h-16 mx-auto mb-4" />
         <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
           NoBG
         </h1>

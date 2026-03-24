@@ -6,6 +6,7 @@ function PortingBlogPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col p-4 md:p-8">
       <header className="text-center mb-10 mt-8">
+        <img src="/logo.png" alt="NoBG Logo" className="w-12 h-12 mx-auto mb-4 cursor-pointer" onClick={() => window.location.href='/'} />
         <h1 className="text-3xl font-extrabold tracking-tighter sm:text-4xl md:text-5xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent mb-4 max-w-4xl mx-auto">
           How I Ported RemBG to ONNXRuntime Web
         </h1>
