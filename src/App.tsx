@@ -355,7 +355,7 @@ export default function App() {
           <p className="text-muted-foreground leading-relaxed text-[17px]">
             NoBG is a completely free, fast, and private background removal tool that runs entirely in your web browser.
             Unlike other popular background removers, <strong>your photos are never uploaded to any server.</strong>
-            We use advanced WebAssembly and ONNX Runtime technology to process your images locally on your device.
+            We use WebAssembly and ONNX Runtime Web to process your images locally on your device.
           </p>
         </article>
 
@@ -363,7 +363,7 @@ export default function App() {
           <article className="space-y-3">
             <h3 className="text-xl font-semibold">How it Works</h3>
             <p className="text-muted-foreground leading-relaxed">
-              When you select an image, NoBG downloads a small AI model (U2Net) to your browser cache just once.
+              When you select an image, NoBG downloads a small AI model (u2netp.onnx) to your browser cache just once.
               The application then runs the complex neural network directly on your CPU or GPU to mask out the background.
               You get instant results without waiting for cloud processing or worrying about your privacy.
             </p>
@@ -389,11 +389,6 @@ export default function App() {
             <div>
               <h4 className="font-semibold text-foreground text-lg mb-1">What devices does this work on?</h4>
               <p className="text-muted-foreground">NoBG works seamlessly on modern web browsers (Chrome, Firefox, Safari, Edge) across desktop computers, laptops, and capable mobile devices.</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-foreground text-lg mb-1">Why do the advanced settings help?</h4>
-              <p className="text-muted-foreground">The "RemBG" processing mode with Alpha Matting fine-tunes edges around tricky subjects like hair or fur. You can safely tweak foreground and background thresholds for perfect transparent background cutouts.</p>
             </div>
           </div>
         </article>
