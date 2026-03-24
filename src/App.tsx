@@ -164,7 +164,7 @@ export default function App() {
           NoBG
         </h1>
         <p className="text-muted-foreground max-w-[600px] mx-auto text-lg mb-6">
-          Client-side background removal via WebAssembly and ONNX Runtime.
+          Remove background instantly, runs locally, no upload to servers.
         </p>
         <div ref={kofiRef} className="flex justify-center" />
       </header>
