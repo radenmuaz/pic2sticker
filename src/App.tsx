@@ -372,7 +372,7 @@ export default function App() {
           <article className="space-y-3">
             <h3 className="text-xl font-semibold">100% Private & Secure</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Why does "no-upload" matter? Whether you're removing backgrounds from personal photos, confidential company assets, or ID cards, your images never leave your computer. There are no external servers logging your pictures, no databases storing your information, and no potential data leaks to worry about.
+              Why does "no-upload" matter? Whether you're removing backgrounds from personal photos, confidential company assets, or ID cards, your images never leave your computer. There are no external servers logging your pictures, hence no potential data leaks to worry about.
             </p>
           </article>
         </div>
